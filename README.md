@@ -105,7 +105,7 @@ target as shown in the figure below.
 
 <center>
 <figure>
-  <img src="../../wiki/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
+  <img src=“http://researchkit.github.io/wiki/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
    <figcaption><center>Adding the ResearchKit framework to Embedded Binaries</center></figcaption>
 </figure>
 </center>
