@@ -105,7 +105,7 @@ target as shown in the figure below.
 
 <center>
 <figure>
-  <img src="https://raw.githubusercontent.com/wiki/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
+  <img src="https://raw.githubusercontent.com/wiki/ResearchKit/ResearchKit/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
    <figcaption><center>Adding the ResearchKit framework to Embedded Binaries</center></figcaption>
 </figure>
 </center>
@@ -173,7 +173,7 @@ instruction step:
 
 <center>
 <figure>
-  <img src="https://raw.githubusercontent.com/wiki/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
+  <img src="https://raw.githubusercontent.com/wiki/ResearchKit/ResearchKit/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
 </figure>
 </center>
 
