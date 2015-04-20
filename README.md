@@ -95,7 +95,7 @@ your iOS app project in Xcode:
 
 <center>
 <figure>
-  <img src="../../wiki/AddingResearchKitXcode.png" alt="Adding the ResearchKit framework to your project" align="middle"/>
+  <img src="https://raw.githubusercontent.com/wiki/ResearchKit/ResearchKit/AddingResearchKitXcode.png" alt="Adding the ResearchKit framework to your project" align="middle"/>
 </figure>
 </center>
 
@@ -105,7 +105,7 @@ target as shown in the figure below.
 
 <center>
 <figure>
-  <img src=“http://researchkit.github.io/wiki/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
+  <img src="https://raw.githubusercontent.com/wiki/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
    <figcaption><center>Adding the ResearchKit framework to Embedded Binaries</center></figcaption>
 </figure>
 </center>
@@ -121,8 +121,8 @@ simple, we'll use an instruction step (`ORKInstructionStep`) and name
 the step `myStep`.
 
 ```swift 	
-var myStep = ORKInstructionStep(identifier: “intro”)
-myStep.title = “Welcome to ResearchKit”
+var myStep = ORKInstructionStep(identifier: "intro")
+myStep.title = "Welcome to ResearchKit"
 ```
 
 ###3. Create a Task
@@ -135,7 +135,7 @@ ones. Name your task `task` and initialize it with `myStep`.
 ```swift
 var task: ORKOrderedTask {
 	//myStep placed inside task here
-	return ORKOrderedTask(identifier: “task”, steps: [myStep])
+	return ORKOrderedTask(identifier: "task", steps: [myStep])
 }
 ```
 
@@ -159,7 +159,7 @@ which you must implement in order to handle the completion of the task:
 ```swift
 func taskViewController(taskViewController: ORKTaskViewController, didFinishWithReason reason: ORKTaskViewControllerFinishReason, error: NSError?) {
         
-            var taskResult = ORKTaskResult(identifier: “taskResult”)
+            var taskResult = ORKTaskResult(identifier: "taskResult")
             //You could do something with the result here.
         
             // Then, dismiss the task view controller.
@@ -173,7 +173,7 @@ instruction step:
 
 <center>
 <figure>
-  <img src="../../wiki/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
+  <img src="https://raw.githubusercontent.com/wiki/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
 </figure>
 </center>
 
