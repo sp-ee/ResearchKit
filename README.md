@@ -159,7 +159,7 @@ which you must implement in order to handle the completion of the task:
 ```swift
 func taskViewController(taskViewController: ORKTaskViewController, didFinishWithReason reason: ORKTaskViewControllerFinishReason, error: NSError?) {
         
-            var taskResult = ORKTaskResult(identifier: "taskResult")
+            var taskResult = ORKTaskResult()
             //You could do something with the result here.
         
             // Then, dismiss the task view controller.
