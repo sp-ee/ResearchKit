@@ -6,8 +6,8 @@ create apps for medical research or for other research projects.
 
 * Getting Started: [Getting Started](#gettingstarted)
 * Documentation: ([Programming Guide](http://researchkit.github.io/docs/docs/Overview/GuideOverview.html)) ([API](http://researchkit.github.io/docs/index.html))
-* Best practices: [Best Practices](../../wiki/best_practices)
-* Contributing to ResearchKit: [Contributing](../../wiki/contributing)
+* Best practices: [Best Practices](../../wiki/best-practices)
+* Contributing to ResearchKit: [Contributing](CONTRIBUTING.md)
 * Website and blog: ([researchkit.org](http://researchkit.github.io/index.html))  ([Blog](http://researchkit.github.io/blog.html))
 * ResearchKit BSD License: [License](#license)
 
@@ -18,7 +18,7 @@ Getting More Information
 * Join [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) for discussing ongoing work to improve and expand the framework.
 * Or [contact us](https://developer.apple.com/contact/researchkit/)
 
-Use cases
+Use Cases
 ===========
 
 A task in the ResearchKit framework contains a set of steps to present to a
@@ -48,7 +48,7 @@ programming for iOS. ResearchKit's active tasks invite users to perform activiti
 under semi-controlled conditions, while iPhone sensors actively collect data.  [Active Tasks](http://researchkit.github.io/docs/docs/ActiveTasks/ActiveTasks.html)
 
 
-Getting started<a name="gettingstarted"></a>
+Getting Started<a name="gettingstarted"></a>
 ===============
 
 
@@ -63,7 +63,7 @@ using the ResearchKit framework can run on devices with iOS 8.0 or newer.
 Installation
 ------------
 
-The lastest stable version of ResearchKit framework can be cloned with
+The latest stable version of ResearchKit framework can be cloned with
 
 ```
 git clone -b stable https://github.com/ResearchKit/ResearchKit.git
@@ -95,7 +95,7 @@ your iOS app project in Xcode:
 
 <center>
 <figure>
-  <img src="https://raw.githubusercontent.com/wiki/ResearchKit/ResearchKit/AddingResearchKitXcode.png" alt="Adding the ResearchKit framework to your project" align="middle"/>
+  <img src="../../wiki/AddingResearchKitXcode.png" alt="Adding the ResearchKit framework to your project" align="middle"/>
 </figure>
 </center>
 
@@ -105,10 +105,12 @@ target as shown in the figure below.
 
 <center>
 <figure>
-  <img src="https://raw.githubusercontent.com/wiki/ResearchKit/ResearchKit/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
+  <img src="../../wiki/AddedBinaries.png" width="100%" alt="Adding the ResearchKit framework to Embedded Binaries" align="middle"/>
    <figcaption><center>Adding the ResearchKit framework to Embedded Binaries</center></figcaption>
 </figure>
 </center>
+
+Note: You can also import ResearchKit into your project using a [dependency manager](./dependency_management.md) such as CocoaPods or Carthage.
 
 ###2. Create a Step
 
@@ -120,23 +122,39 @@ Create a step for your task by adding some code, perhaps in
 simple, we'll use an instruction step (`ORKInstructionStep`) and name
 the step `myStep`.
 
-```swift 	
-var myStep = ORKInstructionStep(identifier: "intro")
+*Objective-C*
+
+```objc 	
+ORKInstructionStep *myStep =
+  [[ORKInstructionStep alloc] initWithIdentifier:@"intro"];
+myStep.title = @"Welcome to ResearchKit";
+```
+
+*Swift*
+
+```swift
+let myStep = ORKInstructionStep(identifier: "intro")
 myStep.title = "Welcome to ResearchKit"
 ```
 
 ###3. Create a Task
 
 Use the ordered task class (`ORKOrderedTask`) to create a task that
-contains myStep. An ordered task is just a task where the order and
+contains `myStep`. An ordered task is just a task where the order and
 selection of later steps does not depend on the results of earlier
 ones. Name your task `task` and initialize it with `myStep`.
 
+*Objective-C*
+
+```objc
+ORKOrderedTask *task =
+  [[ORKOrderedTask alloc] initWithIdentifier:@"task" steps:@[myStep]];
+```
+
+*Swift*
+
 ```swift
-var task: ORKOrderedTask {
-	//myStep placed inside task here
-	return ORKOrderedTask(identifier: "task", steps: [myStep])
-}
+let task = ORKOrderedTask(identifier: "task", steps: [myStep])
 ```
 
 ###4. Present the Task
@@ -145,6 +163,17 @@ Create a task view controller (`ORKTaskViewController`) and initialize
 it with your `task`. A task view controller manages a task and collects the
 results of each step. In this case, your task view
 controller simply displays your instruction step.
+
+*Objective-C*
+
+```objc
+ORKTaskViewController *taskViewController =
+  [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+taskViewController.delegate = self;
+[self presentViewController:taskViewController animated:YES completion:nil];
+```
+
+*Swift*
 
 ```swift
 let taskViewController = ORKTaskViewController(task: task, taskRunUUID: nil)
@@ -156,15 +185,33 @@ The above snippet assumes that your class implements the
 `ORKTaskViewControllerDelegate` protocol. This has just one required method,
 which you must implement in order to handle the completion of the task:
 
+*Objective-C*
+
+```objc
+- (void)taskViewController:(ORKTaskViewController *)taskViewController
+       didFinishWithReason:(ORKTaskViewControllerFinishReason)reason
+                     error:(NSError *)error {
+
+    ORKTaskResult *taskResult = [taskViewController result];
+    // You could do something with the result here.
+
+    // Then, dismiss the task view controller.
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+```
+
+*Swift*
+
 ```swift
-func taskViewController(taskViewController: ORKTaskViewController, didFinishWithReason reason: ORKTaskViewControllerFinishReason, error: NSError?) {
-        
-            var taskResult = ORKTaskResult()
-            //You could do something with the result here.
-        
-            // Then, dismiss the task view controller.
-            taskViewController.dismissViewControllerAnimated(true, completion: nil)
-        }
+func taskViewController(taskViewController: ORKTaskViewController, 
+                didFinishWithReason reason: ORKTaskViewControllerFinishReason, 
+                                     error: NSError?) {
+  let taskResult = taskViewController.result
+  // You could do something with the result here.
+
+  // Then, dismiss the task view controller.
+  dismissViewControllerAnimated(true, completion: nil)
+}
 ```
 
  
@@ -173,7 +220,7 @@ instruction step:
 
 <center>
 <figure>
-  <img src="https://raw.githubusercontent.com/wiki/ResearchKit/ResearchKit/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
+  <img src="../../wiki/HelloWorld.png" width="50%" alt="HelloWorld example screenshot" align="middle"/>
 </figure>
 </center>
 

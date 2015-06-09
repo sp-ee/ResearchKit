@@ -28,43 +28,49 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
-#import <ResearchKit/ResearchKit_Private.h>
 
-typedef id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSString *property);
-typedef id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
-typedef id (^ORKESerializationObjectToJSONBlock)(id object);
-typedef id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
+NS_ASSUME_NONNULL_BEGIN
 
+
+typedef __nullable id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSString *property);
+typedef __nullable id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
+typedef __nullable id (^ORKESerializationObjectToJSONBlock)(id object);
+typedef __nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 
 
 @interface ORKESerializer : NSObject
 
-+ (NSDictionary *)JSONObjectForObject:(id)object error:(NSError * __autoreleasing *)error;
++ (nullable NSDictionary *)JSONObjectForObject:(id)object error:(NSError * __autoreleasing *)error;
 
-+ (NSData *)JSONDataForObject:(id)object error:(NSError *__autoreleasing *)error;
++ (nullable NSData *)JSONDataForObject:(id)object error:(NSError *__autoreleasing *)error;
 
-+ (id)objectFromJSONObject:(NSDictionary *)object error:(NSError *__autoreleasing *)error;
++ (nullable id)objectFromJSONObject:(NSDictionary *)object error:(NSError *__autoreleasing *)error;
 
-+ (id)objectFromJSONData:(NSData *)data error:(NSError *__autoreleasing *)error;
++ (nullable id)objectFromJSONData:(NSData *)data error:(NSError *__autoreleasing *)error;
 
 + (NSArray *)serializableClasses;
 
 @end
 
+
 @interface ORKESerializer(Registration)
 
 + (void)registerSerializableClass:(Class)serializableClass
-                        initBlock:(ORKESerializationInitBlock)initBlock;
+                        initBlock:(nullable ORKESerializationInitBlock)initBlock;
 
 + (void)registerSerializableClassPropertyName:(NSString *)propertyName
                                      forClass:(Class)serializableClass
                                    valueClass:(Class)valueClass
-                               containerClass:(Class)containerClass
+                               containerClass:(nullable Class)containerClass
                                writeAfterInit:(BOOL)writeAfterInit
-                            objectToJSONBlock:(ORKESerializationObjectToJSONBlock)objectToJSON
-                            jsonToObjectBlock:(ORKESerializationJSONToObjectBlock)jsonToObjectBlock;
+                            objectToJSONBlock:(nullable ORKESerializationObjectToJSONBlock)objectToJSON
+                            jsonToObjectBlock:(nullable ORKESerializationJSONToObjectBlock)jsonToObjectBlock;
 
 @end
+
+
+NS_ASSUME_NONNULL_END
 
